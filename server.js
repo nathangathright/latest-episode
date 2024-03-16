@@ -22,8 +22,7 @@ const server = http.createServer(async (req, res) => {
 
     let xml = await response.text();
     let doc = new DOMParser().parseFromString(xml);
-    let nodes = xpath.select("//item/enclosure/@url", doc);
-    let latestEpisode = nodes[0].value;
+    let latestEpisode = xpath.select1("//item/enclosure/@url", doc).value;
 
     res.writeHead(302, {
         'Location': latestEpisode
